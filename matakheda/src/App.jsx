@@ -14,7 +14,7 @@ import Festivals from "./pages/Festivals";
 import Facilities from "./pages/Facilities";
 import Contact from "./pages/Contact";
 
-import NagPanchami from "./pages/FestivalDetails/Nagpanchami";
+import NagPanchami from "./pages/FestivalDetails/NagPanchami";
 import TejaDashmi from "./pages/FestivalDetails/TejaDashmi";
 import KartikPurnimaa from "./pages/FestivalDetails/KartikPurnima";
 
