@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const API_BASE = "http://localhost:5000";
+const API_BASE = "hhttps://temple-website-production.up.railway.app";
 
 export default function VisitorPopup() {
   const [visible,    setVisible]    = useState(false);

@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 const TEMPLE_NAME    = "Matakheda Mandir Tukral";
 const TEMPLE_NAME_HI = "माँ नवदुर्गा नागदेव मंदिर माताखेड़ा टुकराल";
 const UPI_ID         = "gopalmakwana98765-1@okicici";
-const API_BASE       = "http://localhost:5000"; // update this URL when the site goes live
+const API_BASE       = "https://temple-website-production.up.railway.app"; // update this URL when the site goes live
 
 function generateDonationID() {
   return "DON" + Math.floor(100000 + Math.random() * 900000);

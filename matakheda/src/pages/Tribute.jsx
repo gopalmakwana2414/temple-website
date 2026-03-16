@@ -14,7 +14,7 @@ const PHOTOS = [
 ];
 
 const VIDEO_SRC = "/images/people/tejkaran_video.mp4";
-const API_BASE  = "http://localhost:5000";
+const API_BASE  = "https://temple-website-production.up.railway.app";
 
 const CONTENT = {
   en: {
