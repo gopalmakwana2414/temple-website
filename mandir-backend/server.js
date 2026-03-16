@@ -6,9 +6,15 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
+
 app.use(cors({
-  origin: "https://matakheda-mandir-tukral.vercel.app"
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
+app.options("*", cors());
+
 app.use(express.json());
 
 // Connect to MongoDB
