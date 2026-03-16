@@ -1,8 +1,6 @@
-[settings]
-rootDirectory = "mandir-backend"
-
-[build] 
+[build]
 builder = "nixpacks"
+buildCommand = "cd mandir-backend && npm install"
 
 [deploy]
-startCommand = "node server.js"
+startCommand = "node mandir-backend/server.js"
