@@ -21,7 +21,7 @@ export default function VisitorPopup() {
       heading: "Welcome, Devotee",
       subheading: "Please register your visit",
       name: "Your full name *",
-      loc: "Your village / city *",
+      loc: "Write the name of your village / city *",
       mob: "Mobile number (optional)",
       visitLbl: "Your visit status *",
       opts: [
@@ -44,7 +44,7 @@ export default function VisitorPopup() {
       heading: "स्वागत है, भक्त",
       subheading: "कृपया अपनी यात्रा पंजीकृत करें",
       name: "आपका पूरा नाम *",
-      loc: "आपका गाँव / शहर *",
+      loc: "आपके गाँव/शहर का नाम लिखिए*",
       mob: "मोबाइल नंबर (वैकल्पिक)",
       visitLbl: "आपकी यात्रा स्थिति *",
       opts: [
