@@ -13,8 +13,6 @@ app.use(cors({
   credentials: true
 }));
 
-app.options("*", cors());
-
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)
@@ -38,7 +36,7 @@ app.post("/api/diya", async (req, res) => {
     await entry.save();
     const total = await Diya.countDocuments();
     res.status(201).json({ message: "Diya lit 🪔", total });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: "Server error." });
   }
 });
@@ -51,7 +49,7 @@ app.get("/api/diya", async (req, res) => {
       .limit(10)
       .select("name village litAt");
     res.json({ total, recent });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: "Server error." });
   }
 });
@@ -75,7 +73,7 @@ app.post("/api/visitor", async (req, res) => {
     const entry = new Visitor({ name, location, mobile: mobile || null, visit, lang });
     await entry.save();
     res.status(201).json({ message: "Visitor registered" });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: "Server error." });
   }
 });
@@ -107,7 +105,7 @@ app.post("/api/donation", async (req, res) => {
     });
     await entry.save();
     res.status(201).json({ message: "Donation saved", donationID });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: "Server error." });
   }
 });
