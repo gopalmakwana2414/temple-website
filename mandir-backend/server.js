@@ -8,23 +8,23 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: "*",
+  origin: "https://matakheda-mandir-tukral.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  credentials: true
 }));
+
+app.options("*", cors());
 
 app.use(express.json());
 
-// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB error:", err));
 
-// Diya Schema
 const diyaSchema = new mongoose.Schema({
-  name:    { type: String, required: true, trim: true },
+  name: { type: String, required: true, trim: true },
   village: { type: String, required: true, trim: true },
-  litAt:   { type: Date, default: Date.now },
+  litAt: { type: Date, default: Date.now },
 });
 const Diya = mongoose.model("Diya", diyaSchema);
 
@@ -39,32 +39,29 @@ app.post("/api/diya", async (req, res) => {
     const total = await Diya.countDocuments();
     res.status(201).json({ message: "Diya lit 🪔", total });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: "Server error." });
   }
 });
 
 app.get("/api/diya", async (req, res) => {
   try {
-    const total  = await Diya.countDocuments();
+    const total = await Diya.countDocuments();
     const recent = await Diya.find()
       .sort({ litAt: -1 })
       .limit(10)
       .select("name village litAt");
     res.json({ total, recent });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: "Server error." });
   }
 });
 
-// Visitor Schema
 const visitorSchema = new mongoose.Schema({
-  name:      { type: String, required: true, trim: true },
-  location:  { type: String, required: true, trim: true },
-  mobile:    { type: String, default: null, trim: true },
-  visit:     { type: String, enum: ["visited", "planning", "online"], required: true },
-  lang:      { type: String, default: "en" },
+  name: { type: String, required: true, trim: true },
+  location: { type: String, required: true, trim: true },
+  mobile: { type: String, default: null, trim: true },
+  visit: { type: String, enum: ["visited", "planning", "online"], required: true },
+  lang: { type: String, default: "en" },
   visitedAt: { type: Date, default: Date.now },
 });
 const Visitor = mongoose.model("Visitor", visitorSchema);
@@ -79,20 +76,18 @@ app.post("/api/visitor", async (req, res) => {
     await entry.save();
     res.status(201).json({ message: "Visitor registered" });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: "Server error." });
   }
 });
 
-// Donation Schema
 const donationSchema = new mongoose.Schema({
   donationID: { type: String, required: true, unique: true },
-  name:       { type: String, required: true, trim: true },
-  address:    { type: String, required: true, trim: true },
-  mobile:     { type: String, required: true, trim: true },
-  amount:     { type: Number, required: true },
-  txnID:      { type: String, required: true, trim: true },
-  donatedAt:  { type: Date, default: Date.now },
+  name: { type: String, required: true, trim: true },
+  address: { type: String, required: true, trim: true },
+  mobile: { type: String, required: true, trim: true },
+  amount: { type: Number, required: true },
+  txnID: { type: String, required: true, trim: true },
+  donatedAt: { type: Date, default: Date.now },
 });
 const Donation = mongoose.model("Donation", donationSchema);
 
@@ -103,17 +98,19 @@ app.post("/api/donation", async (req, res) => {
       return res.status(400).json({ error: "All fields are required." });
     }
     const entry = new Donation({
-      donationID, name, address, mobile,
-      amount: Number(amount), txnID,
+      donationID,
+      name,
+      address,
+      mobile,
+      amount: Number(amount),
+      txnID,
     });
     await entry.save();
     res.status(201).json({ message: "Donation saved", donationID });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: "Server error." });
   }
 });
 
-// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
