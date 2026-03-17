@@ -2,12 +2,16 @@ import { useState, useEffect, useRef } from "react";
 
 const API_BASE = "https://temple-website-production.up.railway.app";
 
+const LOCATIONS_EN = ["Tukral", "Ghonsla", "Ujjain", "Other"];
+const LOCATIONS_HI = ["टुकराल", "घोंसला", "उज्जैन", "अन्य"];
+
 export default function VisitorPopup() {
   const [visible,    setVisible]    = useState(false);
   const [closed,     setClosed]     = useState(false);
   const [lang,       setLang]       = useState("en");
   const [name,       setName]       = useState("");
   const [location,   setLocation]   = useState("");
+  const [customLoc,  setCustomLoc]  = useState("");
   const [mobile,     setMobile]     = useState("");
   const [visit,      setVisit]      = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -21,7 +25,8 @@ export default function VisitorPopup() {
       heading: "Welcome, Devotee",
       subheading: "Please register your visit",
       name: "Your full name *",
-      loc: "Write the name of your village / city *",
+      loc: "Select your village / city *",
+      customLoc: "Enter your village / city *",
       mob: "Mobile number (optional)",
       visitLbl: "Your visit status *",
       opts: [
@@ -33,7 +38,8 @@ export default function VisitorPopup() {
       submit: "Submit & Continue",
       saving: "Saving...",
       skip: "Skip for now",
-      okMsg: "Thank you! Jay ho Shree Matakheda Sarka!",
+      okMsg: "Thank you!",
+      okMsg2: "Jay ho Shree Matakheda Sarkar🙏",
       okSub: "Your registration has been saved.",
       okBtn: "Continue to Website",
       reqErr: "Please fill name, location and visit status.",
@@ -41,10 +47,11 @@ export default function VisitorPopup() {
     },
     hi: {
       toggle: "Fill in English",
-      heading: "स्वागत है, भक्त",
+      heading: "माताखेड़ा मंदिर टुकराल आपका हार्दिक स्वागत करता है।",
       subheading: "कृपया अपनी यात्रा पंजीकृत करें",
       name: "आपका पूरा नाम *",
-      loc: "आपके गाँव/शहर का नाम लिखिए*",
+      loc: "अपना गाँव/शहर चुनें *",
+      customLoc: "अपना गाँव/शहर लिखिए *",
       mob: "मोबाइल नंबर (वैकल्पिक)",
       visitLbl: "आपकी यात्रा स्थिति *",
       opts: [
@@ -56,7 +63,8 @@ export default function VisitorPopup() {
       submit: "जमा करें",
       saving: "सहेजा जा रहा है...",
       skip: "अभी छोड़ें",
-      okMsg: "धन्यवाद! जय हो श्री माताखेड़ा सरकार की ",
+      okMsg: "धन्यवाद!",
+      okMsg2: "जय हो श्री माताखेड़ा सरकार की 🙏",
       okSub: "आपका पंजीकरण सहेज लिया गया।",
       okBtn: "वेबसाइट पर जाएं",
       reqErr: "कृपया नाम, स्थान और स्थिति भरें।",
@@ -64,39 +72,25 @@ export default function VisitorPopup() {
     },
   };
   const t = T[lang];
+  const locationOptions = lang === "en" ? LOCATIONS_EN : LOCATIONS_HI;
+  const isOther = location === "Other" || location === "अन्य";
+  const finalLocation = isOther ? customLoc.trim() : location;
 
   useEffect(() => {
-    /* Skip if user already filled the form this session */
-
     if (localStorage.getItem("vp_registered") === "1") return;
-
-    const DELAY = 5000; // change to 30000 for production
-
-    /* Save the time when user first opened the site */
-
+    const DELAY = 5000;
     const arrivedAt = localStorage.getItem("vp_arrived");
     if (!arrivedAt) {
-      /* First time visiting - save arrival time */
-
       localStorage.setItem("vp_arrived", Date.now().toString());
-      /* Show popup after 5 seconds */
-
       timerRef.current = setTimeout(() => setVisible(true), DELAY);
     } else {
-      /* If user refreshed, check how much time has already passed */
-
       const elapsed = Date.now() - parseInt(arrivedAt, 10);
       if (elapsed >= DELAY) {
-        /* Enough time has passed - show now */
-
         setVisible(true);
       } else {
-        /* Wait only the remaining time */
-
         timerRef.current = setTimeout(() => setVisible(true), DELAY - elapsed);
       }
     }
-
     return () => clearTimeout(timerRef.current);
   }, []);
 
@@ -104,7 +98,7 @@ export default function VisitorPopup() {
 
   const handleSubmit = async () => {
     setError("");
-    if (!name.trim() || !location.trim() || !visit) {
+    if (!name.trim() || !finalLocation || !visit) {
       setError(t.reqErr);
       return;
     }
@@ -115,7 +109,7 @@ export default function VisitorPopup() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: name.trim(),
-          location: location.trim(),
+          location: finalLocation,
           mobile: mobile.trim() || null,
           visit,
           lang,
@@ -133,8 +127,6 @@ export default function VisitorPopup() {
   };
 
   const handleSkip = () => {
-    /* Reset timer so popup shows again next visit */
-
     localStorage.removeItem("vp_arrived");
     setClosed(true);
   };
@@ -221,20 +213,19 @@ export default function VisitorPopup() {
   return (
     <div style={S.overlay}>
       <div style={S.box}>
-
         {success ? (
           <div style={S.successWrap}>
             <div style={S.successIcon}>🪔</div>
             <h3 style={S.successH3}>🙏 {t.okMsg}</h3>
+            <h3 style={S.successH3}>{t.okMsg2}</h3>
             <p  style={S.successP}>{t.okSub}</p>
             <button style={S.continueBtn} onClick={handleContinue}>{t.okBtn}</button>
           </div>
-
         ) : (
           <>
             <div style={S.head}>
               <button style={S.langBtn}
-                onClick={() => setLang(l => l === "en" ? "hi" : "en")}>
+                onClick={() => { setLang(l => l === "en" ? "hi" : "en"); setLocation(""); setCustomLoc(""); }}>
                 {t.toggle}
               </button>
               <div style={S.om}>ॐ</div>
@@ -246,8 +237,19 @@ export default function VisitorPopup() {
               <input style={S.input} placeholder={t.name}
                 value={name} onChange={e => setName(e.target.value)} maxLength={80} />
 
-              <input style={S.input} placeholder={t.loc}
-                value={location} onChange={e => setLocation(e.target.value)} maxLength={80} />
+              <label style={S.label}>{t.loc}</label>
+              <select style={S.select} value={location}
+                onChange={e => { setLocation(e.target.value); setCustomLoc(""); }}>
+                <option value="">— {lang === "en" ? "Select" : "चुनें"} —</option>
+                {locationOptions.map(l => (
+                  <option key={l} value={l}>{l}</option>
+                ))}
+              </select>
+
+              {isOther && (
+                <input style={S.input} placeholder={t.customLoc}
+                  value={customLoc} onChange={e => setCustomLoc(e.target.value)} maxLength={80} />
+              )}
 
               <input style={S.input} placeholder={t.mob} type="tel"
                 value={mobile} onChange={e => setMobile(e.target.value)} maxLength={15} />
@@ -271,8 +273,8 @@ export default function VisitorPopup() {
             </div>
           </>
         )}
-
       </div>
     </div>
   );
 }
+

@@ -64,11 +64,11 @@ export default function Hero() {
             <span className="ticker-item">🙏 माँ नवदुर्गा नागदेव मंदिर माताखेड़ा टुकराल आपका हार्दिक स्वागत करता है ।&nbsp;•&nbsp;</span>
             <span className="ticker-item">📿प्रत्येक नागपंचमी से भादवा सुदी तेजादशमी तक साक्षात् नागदेवता के दर्शन लाभ लें।&nbsp;•&nbsp;</span>
             <span className="ticker-item">🎉वर्ष 1994 से यहां शुभ विवाह की लगन पाति / पत्रिका लिखी जाती है।&nbsp;•&nbsp;</span>
-            <span className="ticker-item">🪔 वर्ष 2012 से शुद्ध घी की अखण्ड ज्योत प्रज्ज्वलित हे। &nbsp;•&nbsp;</span>
+            <span className="ticker-item">🪔 वर्ष 2012 से शुद्ध घी की अखण्ड ज्योत प्रज्ज्वलित है । &nbsp;•&nbsp;</span>
             <span className="ticker-item">🌸मंदिर के विकास हेतु तन-मन-धन से सहयोग करें।&nbsp;•&nbsp;</span>
-            <span className="ticker-item">🛕 ग्राम-टुकराल, तहसील-माकड़ोन, जिला-उज्जैन मध्यप्रदेश &nbsp;•&nbsp;</span>
+            <span className="ticker-item">🛕 ग्राम-टुकराल, तहसील-माकड़ोन, जिला-उज्जैन मध्यप्रदेश. . . . &nbsp;•&nbsp;</span>
             {/* repeat items so the scroll loops smoothly */}
-            <span className="ticker-item">🙏 माँ नवदुर्गा नागदेव मंदिर माताखेड़ा टुकराल आपका हार्दिक स्वागत करता है ।&nbsp;•&nbsp;</span>
+            <span className="ticker-item">🙏 माँ नवदुर्गा नागदेव मंदिर माताखेड़ा टुकराल आपका हार्दिक स्वागत करता है।&nbsp;&nbsp;</span>
             <span className="ticker-item">📿प्रत्येक नागपंचमी से भादवा सुदी तेजादशमी तक साक्षात् नागदेवता के दर्शन लाभ लें।&nbsp;•&nbsp;</span>
             <span className="ticker-item">🎉वर्ष 1994 से यहां शुभ विवाह की लगन पाति / पत्रिका लिखी जाती है।&nbsp;•&nbsp;</span>
             <span className="ticker-item">🪔 वर्ष 2012 से शुद्ध घी की अखण्ड ज्योत प्रज्ज्वलित हे। &nbsp;•&nbsp;</span>
