@@ -73,7 +73,7 @@ app.post("/api/visitor", async (req, res) => {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    const data = new Visitor({ name, location, mobile, visit, lang });
+    const data = new Visitor({ name: sanitize(name), location: sanitize(location), mobile, visit: sanitize(visit), lang });
     await data.save();
 
     console.log("✅ Visitor saved:", name);
@@ -95,8 +95,8 @@ app.post("/api/donation", async (req, res) => {
   try {
     const { name, amount, message } = req.body;
 
-    if (!name || !amount) {
-      return res.status(400).json({ error: "Name and amount required" });
+    if (!name || amount <= 0) {
+      return res.status(400).json({ error: "Name and amount must be positive" });
     }
 
     const donation = new Donation({ name, amount, message });
