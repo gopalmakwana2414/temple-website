@@ -46,7 +46,7 @@ className="festival-img"
 />
 
 <h2 className="festival-name">
-{festival.name}
+{DOMPurify.sanitize(festival.name)}
 </h2>
 
 </div>

@@ -34,7 +34,8 @@ export default function Hero() {
 
   useEffect(() => {
     resetTimer();
-    setTimeout(() => setLoaded(true), 100);
+    const timeoutId = setTimeout(() => setLoaded(true), 100);
+return () => clearTimeout(timeoutId);
     setParticles(
       Array.from({ length: 18 }, (_, i) => ({
         id: i,

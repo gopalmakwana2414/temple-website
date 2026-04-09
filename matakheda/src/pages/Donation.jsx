@@ -154,7 +154,10 @@ export default function Donation() {
 
       /* Generate the receipt image */
 
-      const dataURL = await buildReceiptDataURL({ donationID, name, address, mobile, amount, txnID, date });
+      const sanitizedName = DOMPurify.sanitize(name);
+const sanitizedAddress = DOMPurify.sanitize(address);
+const sanitizedMobile = DOMPurify.sanitize(mobile);
+const dataURL = await buildReceiptDataURL({ donationID, sanitizedName, sanitizedAddress, sanitizedMobile, amount, txnID, date });
       setReceiptImg(dataURL);
       setStep(3);
       setTimeout(() => receiptRef.current?.scrollIntoView({ behavior: "smooth" }), 100);

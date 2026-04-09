@@ -64,7 +64,7 @@ function Lightbox({ images, index, onClose }) {
   const [current, setCurrent] = useState(index);
   useEffect(() => {
     const h = e => {
-      if (e.key === "ArrowRight") setCurrent(c => (c + 1) % images.length);
+      if (images.length > 0 && e.key === "ArrowRight") setCurrent(c => (c + 1) % images.length);
       if (e.key === "ArrowLeft")  setCurrent(c => (c - 1 + images.length) % images.length);
       if (e.key === "Escape")     onClose();
     };
