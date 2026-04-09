@@ -20,7 +20,7 @@ function useReveal(threshold = 0.15) {
       { threshold }
     );
     if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
+    return () => { obs.disconnect(); };
   }, [images, onClose]);
   return [ref, visible];
 }
