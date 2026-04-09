@@ -157,7 +157,7 @@ export default function Donation() {
       const sanitizedName = DOMPurify.sanitize(name);
 const sanitizedAddress = DOMPurify.sanitize(address);
 const sanitizedMobile = DOMPurify.sanitize(mobile);
-const dataURL = await buildReceiptDataURL({ donationID, sanitizedName, sanitizedAddress, sanitizedMobile, amount, txnID, date });
+const dataURL = await buildReceiptDataURL({ donationID, name: sanitizedName, address: sanitizedAddress, mobile: sanitizedMobile, amount, txnID, date });
       setReceiptImg(dataURL);
       setStep(3);
       setTimeout(() => receiptRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
