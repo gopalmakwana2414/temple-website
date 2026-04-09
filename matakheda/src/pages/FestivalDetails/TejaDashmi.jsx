@@ -58,7 +58,7 @@ function useReveal(threshold = 0.12) {
   useEffect(() => {
     const obs = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setVis(true); obs.disconnect(); } },
-      { threshold }
+<a href={WIKI} target="_blank" rel="noopener noreferrer" style={{'CSP': 'default-src self;'}}>
     );
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
