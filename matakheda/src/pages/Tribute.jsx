@@ -121,7 +121,7 @@ export default function Tribute() {
 
   useEffect(() => {
     setTimeout(() => setHeadLoaded(true), 80);
-    fetch(`${API_BASE}/api/diya`)
+    fetch(`${API_BASE}/api/diya`, { headers: { 'Authorization': 'Bearer <token>' } })
       .then(r => r.json())
       .then(data => setTotal(data.total))
       .catch(() => {});
