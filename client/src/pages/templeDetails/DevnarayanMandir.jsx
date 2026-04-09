@@ -81,7 +81,6 @@ function Lightbox({ images, index, onClose }) {
       if (e.key === "Escape")     onClose();
     };
     return () => window.removeEventListener("keydown", h);
-    return () => window.removeEventListener("keydown", h);
   }, []);
   const btnStyle = (extra = {}) => ({
     position: "absolute", top: "50%", transform: "translateY(-50%)",

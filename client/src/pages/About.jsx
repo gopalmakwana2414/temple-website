@@ -12,7 +12,7 @@ function useReveal(threshold = 0.12) {
       { threshold }
     );
     if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
+    return () => { obs.disconnect(); ref.current = null; };
   }, []);
   return [ref, vis];
 }

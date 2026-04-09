@@ -109,7 +109,7 @@ export default function VisitorPopup() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: DOMPurify.sanitize(name.trim()),
-          location: finalLocation,
+          location: DOMPurify.sanitize(finalLocation),
           mobile: DOMPurify.sanitize(mobile.trim()) || null,
           visit,
           lang,
