@@ -43,7 +43,7 @@ const Footer = () => {
             <a
               href="https://www.instagram.com/matakheda_mandir_tukral?igsh=anl4eDlrcXdhaG83"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="hover:text-yellow-400 transition"
             >
               <FaInstagram />
