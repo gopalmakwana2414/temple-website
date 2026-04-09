@@ -255,7 +255,7 @@ export default function Contact() {
           background: linear-gradient(135deg, #fff3e0, #ffe0b2);
           color: #b83200;
           font-size: 12px;
-          font-weight: 600;
+          font-weight: 60;0;
           letter-spacing: 0.06em;
           padding: 3px 12px;
           border-radius: 20px;
