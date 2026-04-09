@@ -24,7 +24,7 @@ link:"/Festivals/kartik-purnima"
 
 ];
 
-return(
+ {DOMPurify.sanitize(festival.name)} 
 
 <div className="min-h-screen bg-orange-50 py-16">
 
