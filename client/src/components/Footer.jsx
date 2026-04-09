@@ -53,7 +53,7 @@ const Footer = () => {
             <a
               href="https://www.facebook.com/share/18LVuBtry3/"
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
               className="hover:text-yellow-400 transition"
             >
               <FaFacebook />
@@ -63,7 +63,7 @@ const Footer = () => {
             <a
               href="https://youtube.com/@matakhedamandirtukral?si=-6GaYA9tc3Diu5jM"
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
               className="hover:text-yellow-400 transition"
             >
               <FaYoutube />
@@ -90,7 +90,7 @@ const Footer = () => {
             <a
               href="https://github.com/gopalmakwana2414"
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
               className="hover:text-yellow-400 transition"
             >
               <FaGithub />
