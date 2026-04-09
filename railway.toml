@@ -1,6 +1,6 @@
 [build]
 builder = "nixpacks"
-buildCommand = "cd mandir-backend && npm install"
+buildCommand = "cd mandir-backend && npm ci"
 
 [deploy]
 startCommand = "node mandir-backend/server.js"
